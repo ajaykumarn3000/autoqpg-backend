@@ -1,0 +1,97 @@
+* {
+  font-family: 'Times New Roman', Times, serif;
+  margin: 0;
+}
+#question-paper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: hidden;
+}
+header {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .img-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+header img {
+  height: 55pt;
+  margin: 0 10pt;
+}
+header h1 {
+  font-size: 24pt;
+  font-weight: bold;
+}
+header h2 {
+  font-size: 12pt;
+  font-weight: bold;
+}
+header h3 {
+  font-size: 12pt;
+  font-weight: normal;
+}
+header h4 {
+  font-size: 10pt;
+  font-weight: normal;
+}
+
+main {
+  margin-top: 20pt;
+  flex-grow: 1;
+}
+
+#title {
+  margin-bottom: 10pt;
+  text-align: center;
+}
+#title h1 {
+  font-size: 14pt;
+  font-weight: bold;
+}
+#title h4 {
+  font-size: 11pt;
+  font-weight: normal;
+}
+
+#meta {
+  display: flex;
+  font-size: 11pt;
+  font-weight: normal;
+}
+#meta .left {
+  flex-grow: 1;
+}
+
+#instruction {
+  margin-top: 10pt;
+  font-size: 11pt;
+  font-weight: normal;
+}
+
+#question {
+  margin-top: 10pt;
+  display: grid;
+  grid-template-columns: minmax(40pt, auto) 1fr repeat(4, minmax(40pt, auto));
+  border: 0.3px solid black;
+  text-align: center;
+}
+#question * {
+  border: 0.3px solid black;
+  margin: 0;
+  padding: 0pt 2pt;
+  font-size: 11pt;
+}
+#question *:nth-child(6n+2) {
+  text-align: left;
+}
+
+footer {
+  text-align: right;
+  font-size: 10pt;
+}
+

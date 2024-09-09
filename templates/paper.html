@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Question Paper</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    {% set alphabet = 'abcdefghijklmnopqrstuvwxyz' %}
+  </head>
+  <body>
+    <div id="question-paper">
+      <header>
+        <div class="img-container">
+          <img
+            src="{{url_for('static', filename='sfit_logo.png')}}"
+            alt="sfit logo"
+          />
+        </div>
+        <div class="header-container">
+          <h1>St. Francis Institute of Technology</h1>
+          <h3>(Engineering College)</h3>
+          <h2>An Autonomous Institute, Affiliated to University of Mumbai</h2>
+          <h4>
+            NAAC A+ Accredited | CMPN, EXTC, INFT NBA Accredited | ISO 9001:2015
+            Certified
+          </h4>
+        </div>
+      </header>
+      <main>
+        <div id="title">
+          <h1>{{data.title}}</h1>
+          <h4>Academic Year: {{data.acad_year}}</h4>
+        </div>
+
+        <div id="meta">
+          <div class="left">
+            <p>Department: {{data.department}}</p>
+            <p>Course: {{data.year}}</p>
+            <p>Date: {{data.date}}</p>
+            <p>Marks: {{data.total_marks}}</p>
+          </div>
+          <div class="right">
+            <p>
+              <span>Year: {{data.year}}</span>&emsp;<span
+                >Semester: {{data.semester}}</span
+              >
+            </p>
+            <p>Time: {{data.time}}</p>
+            <p>No. of Pages: {{data.total_pages}}</p>
+          </div>
+        </div>
+
+        <div id="instruction">
+          <p><b>Instructions:</b> {{data.instructions}}</p>
+          <b>Note:</b>
+          {% for element in data.note %}
+          <p>{{loop.index}}. {{element}}</p>
+          {% endfor %}
+        </div>
+
+        <div id="question">
+          <p></p>
+          <p></p>
+          <p>Marks</p>
+          <p>CO</p>
+          <p>BL</p>
+          <p>DL</p>
+
+          {% for question in data.questions %}
+            <p>Q.{{loop.index}}</p>
+            <p>Answer the following</p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+
+            {% for sq in question %}
+              <p>{{alphabet[loop.index0]}}.</p>
+              <p>{{sq.question}}</p>
+              <p>{{sq.marks}}</p>
+              <p>{{sq.co}}</p>
+              <p>{{sq.bl}}</p>
+              <p>{{sq.dl}}</p>
+            {% endfor %}
+          {% endfor %}
+        </div>
+      </main>
+
+      <footer>
+        <p>Page 1 of 1</p>
+      </footer>
+    </div>
+
+    <div>
+      <button id="download-btn">Print</button>
+    </div>
+    <script>
+      document
+        .getElementById("download-btn")
+        .addEventListener("click", function () {
+          // Load the first webpage (webpage.html) into an iframe
+          console.log("Downloading PDF...");
+
+          // Use html2pdf.js to download it as a PDF
+          html2pdf()
+            .from(document.getElementById("question-paper"))
+            .set({
+              margin: 0.5,
+              filename: "webpage.pdf",
+              html2canvas: { scale: 3 },
+              jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+            })
+            .save();
+        });
+    </script>
+  </body>
+</html>
