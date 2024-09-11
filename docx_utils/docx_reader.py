@@ -1,10 +1,11 @@
 from docx import Document
 import zipfile
+from io import BytesIO
 # import os
 import base64
 
 
-def read_docs(file_path: str):
+def read_docx(file_path: str):
     """Reads .docx file from the file_path"""
 
     # Load the .docx file
@@ -18,8 +19,11 @@ def read_docs(file_path: str):
     for row_index, row in enumerate(table.rows):
         question_data = {"para": [], "image": []}
         try:
+            print(row.cells[0].text.strip())
+            print(row.cells[2].text.strip())
             question_data["serial_no"] = int(row.cells[0].text.strip())
-            question_data["co"] = int(row.cells[2].text.strip())
+            question_data["marks"] = list(map(int, row.cells[2].text.strip().replace(" ", "").split(",")))
+            question_data["co"] = int(row.cells[3].text.strip())
         except ValueError:
             return f"Error: Serial Number and Module Number must be integers. Check row {row_index + 1}"
         for paragraph in row.cells[1].paragraphs:
@@ -40,9 +44,7 @@ def extract_images(docx_path):
         for file in docx_file.namelist():
             if file.startswith("word/media/"):
                 image_data = docx_file.read(file)
-                base64_image = base64.b64encode(image_data).decode("utf-8")
-                image_url = f"data:image/png;base64,{base64_image}"
-                yield image_url
-               
-
-read_docs("temp/testing.docx")
+                yield image_data
+                # base64_image = base64.b64encode(image_data).decode("utf-8")
+                # image_url = f"data:image/png;base64,{base64_image}"
+                # yield image_url
