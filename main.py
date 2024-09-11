@@ -3,7 +3,7 @@ import os
 from docx_utils.docx_reader import read_docx
 from Blooms import get_taxonomy_level
 from docx_utils.generate_docx import generate_docx
-from temp.data import data
+from data import data
 
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "cache"
