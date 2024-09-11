@@ -1,6 +1,7 @@
 from docx import Document
+from docx.shared import Inches, Cm
+
 from docx_utils.styles import add_styles
-from docx.shared import Pt, Inches, Cm
 
 CHAR_INDEX = "abcdefghijklmnopqrstuvwxyz"
 CAPITAL_CHAR_INDEX = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -12,22 +13,22 @@ def generate_docx(data, save_path):
 
     # Add Title
     title = doc.add_paragraph(data["title"], "title")
-    acad_year = doc.add_paragraph(f"Academic Year: {data["acad_year"]}", "acad_year")
+    acad_year = doc.add_paragraph(f"Academic Year: {data['acad_year']}", "acad_year")
 
     # Add Department, Year, Course table
     table = doc.add_table(rows=5, cols=2)
     table.style = 'table'
 
-    table.cell(0, 0).text = f"Department: {data["department"]}"
-    table.cell(0, 1).text = f"Year: {data["year"]}\tSemester: {data["semester"]}"
+    table.cell(0, 0).text = f"Department: {data['department']}"
+    table.cell(0, 1).text = f"Year: {data['year']}\tSemester: {data['semester']}"
 
-    table.cell(1, 0).text = f"Course: {data["course"]}"
-    table.cell(1, 1).text = f"Time: {data["time"]}"
+    table.cell(1, 0).text = f"Course: {data['course']}"
+    table.cell(1, 1).text = f"Time: {data['time']}"
 
-    table.cell(2, 0).text = f"Date: {data["date"]}"
-    table.cell(2, 1).text = f"No. of Pages: {data["total_pages"]}"
+    table.cell(2, 0).text = f"Date: {data['date']}"
+    table.cell(2, 1).text = f"No. of Pages: {data['total_pages']}"
 
-    table.cell(3, 0).text = f"Marks: {data["total_marks"]}"
+    table.cell(3, 0).text = f"Marks: {data['total_marks']}"
 
     # Set column width
     for row in table.rows:
@@ -86,11 +87,11 @@ def generate_docx(data, save_path):
             marks.style = "ques_table_body_center"
 
             co = sub_row.cells[3].paragraphs[0]
-            co.text = f"CO{str(sub_question["co"])}"
+            co.text = f"CO{str(sub_question['co'])}"
             co.style = "ques_table_body_center"
 
             bl = sub_row.cells[4].paragraphs[0]
-            bl.text = f"BL{str(sub_question["bl"])}"
+            bl.text = f"BL{str(sub_question['bl'])}"
             bl.style = "ques_table_body_center"
 
             dl = sub_row.cells[5].paragraphs[0]
