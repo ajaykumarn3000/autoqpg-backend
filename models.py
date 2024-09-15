@@ -18,4 +18,4 @@ class Question(Base):
 
 
 # Create all tables (if not already present)
-Base.metadata.create_all(engine)
+Base.metadata.create_all(engine, checkfirst=True)

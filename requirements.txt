@@ -1,5 +1,9 @@
+fief-client[fastapi]
 psycopg2-binary
 python-dotenv
 python-docx
 sqlalchemy
+pydantic
+fastapi
+bcrypt
 flask

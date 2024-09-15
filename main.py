@@ -1,9 +1,12 @@
-from flask import Flask, request, jsonify, render_template, send_file
 import os
-from docx_utils.docx_reader import read_docx
+
+import uvicorn
+from flask import Flask, request, jsonify, render_template, send_file
+
 from Blooms import get_taxonomy_level
-from docx_utils.generate_docx import generate_docx
 from data import data
+from docx_utils.docx_reader import read_docx
+from docx_utils.generate_docx import generate_docx
 
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "cache"
@@ -41,4 +44,4 @@ def generate():
     return send_file(file_path, mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document", as_attachment=True, download_name="generated.docx")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    uvicorn.run("app.app:app", host="0.0.0.0", log_level="info")
