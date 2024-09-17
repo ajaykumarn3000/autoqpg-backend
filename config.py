@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-FIEF_DOMAIN = "http://" + getenv("FIEF_DOMAIN")
+FIEF_DOMAIN = "https://" + getenv("FIEF_DOMAIN")
 FIEF_CLIENT_ID = getenv("FIEF_CLIENT_ID")
 FIEF_CLIENT_SECRET = getenv("FIEF_CLIENT_SECRET")
 SECRET = getenv("SECRET")

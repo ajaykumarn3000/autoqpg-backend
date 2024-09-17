@@ -1,4 +1,5 @@
 from fastapi import Depends, FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2AuthorizationCodeBearer
 from fief_client import FiefAccessTokenInfo, FiefAsync
 from fief_client.integrations.fastapi import FiefAuth
@@ -17,6 +18,14 @@ scheme = OAuth2AuthorizationCodeBearer(
 auth = FiefAuth(fief, scheme)
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 
 @app.get("/user")
